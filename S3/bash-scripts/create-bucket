@@ -1,3 +1,5 @@
+echo "create-bucket"
+
 #!/usr/bin/env bash
 
 # Check for bucket name
