@@ -1,4 +1,4 @@
-echo "create-bucket"
+echo "list-bucket"
 
 #!/usr/bin/env bash
 
