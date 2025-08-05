@@ -11,7 +11,8 @@ fi
 
 BUCKET_NAME=$1
 
-$(aws s3api list-objects-v2 --bucket $BUCKET_NAME)
-aws s3api delete-objects --bucket $BUCKET_NAME
+aws s3api list-objects-v2 --bucket $BUCKET_NAME \
+--query Contents[].Key \
+| jq -n '{Objects: [inputs | .[] | {Key: .}]}'
 
-jq -r '.Contents[].Key'
+#aws s3api delete-objects --bucket $BUCKET_NAME
