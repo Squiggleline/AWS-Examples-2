@@ -15,13 +15,16 @@ if [ -z "$2" ]; then
     exit 1
 fi
 
-
+BUCKET_NAME=$1
+FILENAME_PREFIX=$2
 
 # where we'll store the files
-OUTPUT_DIR="/tmp/S3/bash-scripts"
+OUTPUT_DIR="tmp/S3/bash-scripts"
 
 # remove the folder if it already exists
-rm -r $OUTPUT_DIR
+if [ -d "$OUTPUT_DIR" ]; then
+    rm -r "$OUTPUT_DIR"
+fi
 
 # let's create the output folder
 mkdir -p $OUTPUT_DIR
@@ -32,7 +35,7 @@ NUM_FILES=$((RANDOM % 6 + 5))
 
 for ((i=1; i<=$NUM_FILES; i++)); do
     # generate a random file name
-    RANDOM_FILENAME="$OUTPUT_DIR/${FILENAME_PREFIX}_$i.txt"
+    RANDOM_FILENAME="$OUTPUT_DIR/${FILENAME_PREFIX}_${i}.txt"
 
     # generate random data and write it to the file
     dd if=/dev/urandom of="$RANDOM_FILENAME" bs=1024 count=$((RANDOM % 1024 + 1)) 2>/dev/null
