@@ -2,6 +2,8 @@
 
 echo "== deploy s3 bucket via CFN"
 
+STACK_NAME="cfn-s3-simple"
+
 aws cloudformation deploy \
---template-file
---stack-name
+--template-file template.yaml \
+--stack-name $STACK_NAME
